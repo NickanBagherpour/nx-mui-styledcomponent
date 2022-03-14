@@ -1,0 +1,28 @@
+{
+  "root": "apps/nickapp-e2e",
+  "sourceRoot": "apps/nickapp-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/nickapp-e2e/cypress.json",
+        "devServerTarget": "nickapp:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "nickapp:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/nickapp-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["nickapp"]
+}

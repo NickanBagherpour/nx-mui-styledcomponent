@@ -1,4 +1,7 @@
 {
   "version": 2,
-  "projects": {}
+  "projects": {
+    "nickapp": "apps/nickapp",
+    "nickapp-e2e": "apps/nickapp-e2e"
+  }
 }
