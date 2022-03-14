@@ -1,94 +1,119 @@
-
-
-# NxMuiStyledcomponent
+# Nx Project
 
 This project was generated using [Nx](https://nx.dev).
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+### Installing Nx CLI
 
-🔎 **Smart, Fast and Extensible Build System**
+- `npm install -g nx`
 
-## Adding capabilities to your workspace
+### Create workspace
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+- `npx create-nx-workspace <workspace name> --preset=[apps,react,...]`
+  - Make an empty workspace with `--preset=apps`
+  - Make a workspace with React app with `--preset=react`
+- `npm install -D @nrwl/react`
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
-
-Below are our core plugins:
+<details>
+ <summary><b>Adding capabilities to our workspace</b></summary>
 
 - [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
+  - `npm install -D @nrwl/react`
 - Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
+  - `npm install -D @nrwl/web`
 - [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
+  - `npm install -D @nrwl/angular`
 - [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
+  - `npm install -D @nrwl/nest`
 - [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
+  - `npm install -D @nrwl/express`
 - [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+  - `npm install -D @nrwl/node`
+- ...
 
-There are also many [community plugins](https://nx.dev/community) you could add.
+</details>
 
-## Generate an application
+### Generate an application
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+- Run `nx g @nrwl/react:app <app name>` to generate an application.
 
-> You can use any of the plugins above to generate applications as well.
+### Generate a library
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+- Run `nx g @nrwl/react:lib <library name>` to generate a library.
+- `nx g @nrwl/workspace:lib <library name> [--directory=<dir name>] [--appProject=<app name>]`
+  - for typescript libary
 
-## Generate a library
+Libraries are shareable across libraries and applications. They can be imported from `@nxnick/<library name>`.
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+### Generate a Component
 
-> You can also use any of the plugins above to generate libraries as well.
+- Run `nx g component <component name>` to generate a component with base structure.
+- `nx g c <component name> [--project=<project name (app or lib name)>] `
 
-Libraries are shareable across libraries and applications. They can be imported from `@nx-mui-styledcomponent/mylib`.
+### Development server
 
-## Development server
+- `nx serve` serve `defaultProject` that specified in `nx.json`
+- `nx serve <app name>`
+  The app will automatically reload if you change any of the source files.
 
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+### Build
 
-## Code scaffolding
+To build the project
 
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
+- `nx build` serve `defaultProject` that specified in `nx.json`
+- `nx build <app name>`
 
-## Build
+The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Understand the workspace
 
-## Running unit tests
+Run `nx graph` to see a diagram of the dependencies of our projects.
 
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
+- `nx dep-graph`
+- `nx affected:dep-graph`
+- `nx affected:build`
 
-Run `nx affected:test` to execute the unit tests affected by a change.
+### Setup husky & lint-staged
 
-## Running end-to-end tests
+Follow below steps
 
-Run `nx e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+- `npm install -D husky`
+- `npx husky-init` generates .husky directory
+- `npm install -D lint-staged`
+- copy lint-staged rule to `package.json`, like below :
 
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
+  ```
+    "lint-staged": {
+      "*.{ts,tsx,js,jsx,json,html,css,scss,sass}": [
+        "nx affected:lint --all",
+        "nx format:write"
+      ]
+    }
+  ```
 
-## Understand your workspace
+- copy husky pre-commit and/or pre-push rule to `.husky` directory, like below :
 
-Run `nx graph` to see a diagram of the dependencies of your projects.
+  ```
+    #!/bin/sh
+    . "$(dirname "$0")/_/husky.sh"
+    npx lint-staged
+    nx format:write --uncommitted
+  ```
 
-## Further help
+### Install & Setup Mui with Styled Components
 
-Visit the [Nx Documentation](https://nx.dev) to learn more.
+First install Mui, Mui Icons, Mui Styled Components Engine and Styled Components with below command.
 
+- `npm install @mui/material @mui/icons-material @mui/styled-engine-sc styled-components`
 
+Then add the following path config to your `tsconfig.json`:
 
-## ☁ Nx Cloud
+```json
+"paths": {
+  "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"]
+}
+```
 
-### Distributed Computation Caching & Distributed Task Execution
+And install `@types/styled-components`:
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
+`npm install --save-dev @types/styled-components`
 
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
