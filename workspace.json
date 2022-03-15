@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "nickapp": "apps/nickapp",
-    "nickapp-e2e": "apps/nickapp-e2e"
+    "nickapp-e2e": "apps/nickapp-e2e",
+    "ui-kit": "libs/ui-kit"
   }
 }
