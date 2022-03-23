@@ -117,3 +117,10 @@ And install `@types/styled-components`:
 
 `npm install --save-dev @types/styled-components`
 
+For RTL :
+
+[Read more detailed info here](https://mui.com/material-ui/guides/right-to-left/)
+
+`npm install stylis-plugin-rtl@^1` (currently we should use version 1 because of styled-components requirement)
+
+having issue in stylis-plugin-rtl v1 in typescript, doing this stuff for resolving it temporarily [(issue)](https://github.com/styled-components/stylis-plugin-rtl/issues/31#issuecomment-940184046)
