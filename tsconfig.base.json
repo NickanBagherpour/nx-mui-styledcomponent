@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"],
+      "@nxnick/translations": ["libs/translations/src/index.ts"],
       "@nxnick/ui-kit": ["libs/ui-kit/src/index.ts"]
     }
   },

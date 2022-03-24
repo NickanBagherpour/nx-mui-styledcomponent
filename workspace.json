@@ -3,6 +3,7 @@
   "projects": {
     "nickapp": "apps/nickapp",
     "nickapp-e2e": "apps/nickapp-e2e",
+    "translations": "libs/translations",
     "ui-kit": "libs/ui-kit"
   }
 }

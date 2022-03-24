@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Route, Link } from 'react-router-dom';
 
 import { Button } from '@nxnick/ui-kit';
+import { useTranslation } from '@nxnick/translations';
 import { Box, Checkbox, FormControlLabel, FormGroup, Step, StepLabel, Stepper, Switch, TextField } from '@mui/material';
 
 const StyledApp = styled.div`
@@ -15,19 +16,32 @@ const steps = [
 ];
 
 export function App() {
+  const { t }: any = useTranslation();
+
+  const errorCode = 404;
   return (
     <StyledApp>
-      <Button variant='outlined' />
+      <Button variant='outlined'>
+        {t('button.cancel')}
+      </Button>
       <FormGroup>
-        <FormControlLabel control={<Checkbox defaultChecked />} label='Label' />
-        <FormControlLabel disabled control={<Checkbox />} label='سلام' />
+        <FormControlLabel control={<Checkbox defaultChecked />} label={t('button.register')} />
+        <FormControlLabel disabled control={<Checkbox />} label={t('search')} />
       </FormGroup>
 
       <FormGroup>
-        <FormControlLabel control={<Switch defaultChecked />} label='Label' />
+        <FormControlLabel control={<Switch defaultChecked />} label={t(`title`)} />
         <FormControlLabel disabled control={<Switch />} label='Disabled' />
       </FormGroup>
 
+      <Box margin={10}>
+        <h1>{t('description.part1')}</h1>
+        <h2>{t('description.part2')}</h2>
+        <h3>{t('description.part3')}</h3>
+        <h3>{t('description.part4', { selectLimit: 15 })}</h3>
+        <h4>{t([`error.${errorCode}`, 'error.unspecific'])}</h4>
+        <h4>{t([`error.${errorCode + 5}`, 'error.unspecific'])}</h4>
+      </Box>
 
       <Box
         component='form'
