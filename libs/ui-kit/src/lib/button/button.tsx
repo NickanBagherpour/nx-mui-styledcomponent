@@ -1,21 +1,21 @@
 import styled from 'styled-components';
-import { Button as MuiButton } from '@mui/material';
+import { Button as MuiButton, ButtonProps } from '@mui/material';
 
-export interface ButtonProps {
-  variant?: any;
-  children: React.ReactNode;
+export interface IButtonProps extends ButtonProps {
 }
 
 const StyledButton = styled(MuiButton)`
-  color: ${props => props.theme.palette.secondary.main};
+    //color: ${props => props.theme.palette.secondary.main};
     //background-color: ${props => props.theme.palette.primary.main};
   padding: 5px;
+  min-width: 160px;
 `;
 
-const Button = (props: ButtonProps) => {
+const Button = (props: IButtonProps) => {
+  // console.log(props);
   return (
-    <StyledButton variant={props.variant ?? 'contained'}>
-      {props.children}
+    <StyledButton {...props}>
+      {/*{props.children}*/}
     </StyledButton>
   );
 };

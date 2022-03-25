@@ -1,12 +1,16 @@
-import styled from 'styled-components';
 import { Route, Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { Box, Checkbox, FormControlLabel, FormGroup, Step, StepLabel, Stepper, Switch, TextField } from '@mui/material';
 
 import { Button } from '@nxnick/ui-kit';
 import { useTranslation } from '@nxnick/translations';
-import { Box, Checkbox, FormControlLabel, FormGroup, Step, StepLabel, Stepper, Switch, TextField } from '@mui/material';
 
-const StyledApp = styled.div`
-  // Your style here
+const StyledButton1 = styled(Button)`
+  width: 80px;
+  min-width: 80px;
+  //color: blue;
+  background-color: blue;
+  margin: 0px 5px;
 `;
 
 const steps = [
@@ -20,10 +24,15 @@ export function App() {
 
   const errorCode = 404;
   return (
-    <StyledApp>
-      <Button variant='outlined'>
-        {t('button.cancel')}
+    <>
+      <Button variant='contained'>
+        {t('button.register')}
       </Button>
+
+      <StyledButton1 variant='contained'>
+        {t('button.cancel')}
+      </StyledButton1>
+
       <FormGroup>
         <FormControlLabel control={<Checkbox defaultChecked />} label={t('button.register')} />
         <FormControlLabel disabled control={<Checkbox />} label={t('search')} />
@@ -67,7 +76,7 @@ export function App() {
         </Stepper>
       </Box>
 
-    </StyledApp>
+    </>
   );
 }
 
